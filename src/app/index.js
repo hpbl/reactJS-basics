@@ -17,7 +17,6 @@ class App extends React.Component {
   }
 
   changeLink (newName) {
-    console.log('no index: ' + newName)
     this.setState({
       homeLink: newName
     })
@@ -46,7 +45,8 @@ class App extends React.Component {
               initialAge={22}
               otherPerson={otherPerson}
               greet={this.sayHello}
-              changeLink={(newName) => this.changeLink(newName)}>
+              changeLink={(newName) => this.changeLink(newName)}
+              initialHomeLink={this.state.homeLink}>
               <p>This is a paragraph</p>
             </Home>
           </div>
