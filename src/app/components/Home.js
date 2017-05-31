@@ -4,12 +4,16 @@ import PropTypes from 'prop-types'
 export class Home extends React.Component {
   constructor (props) {
     super()
-    this.age = props.age
+    this.state = {
+      age: props.initialAge,
+      status: 0
+    }
   }
 
   onMakeMeOlder () {
-    this.age += 3
-    console.log(this.age)
+    this.setState({
+      age: this.state.age + 3
+    })
   }
 
   render () {
@@ -18,7 +22,8 @@ export class Home extends React.Component {
         <p>In a new Component!</p>
 
         <p>Name: {this.props.name}</p>
-        <p>Age: {this.age}</p>
+        <p>Age: {this.state.age}</p>
+        <p>Status: {this.state.status}</p>
 
         <p>User Object Name: {this.props.otherPerson.name}</p>
         <h4>Hobbies:</h4>
@@ -28,7 +33,7 @@ export class Home extends React.Component {
         <hr />
         {this.props.children}
         <hr />
-        <button onClick={() => this.onMakeMeOlder()}>Make me Older!</button>
+        <button onClick={() => this.onMakeMeOlder()} className='btn btn-primary'>Make me Older!</button>
       </div>
     )
   }
