@@ -1,58 +1,22 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
-import { Header } from './components/Header'
+import { Root } from '.components/Root'
 import { Home } from './components/Home'
+import { User } from './components/User'
 
 class App extends React.Component {
-  constructor () {
-    super()
-    this.state = {
-      homeLink: 'Home'
-    }
-  }
-
-  sayHello () {
-    window.alert('Hello!')
-  }
-
-  changeLink (newName) {
-    this.setState({
-      homeLink: newName
-    })
-  }
-
   render () {
-    var otherPerson = {
-      name: 'Daniel',
-      hobbies: [
-        'Play Dominos',
-        'Code Java'
-      ]
-    }
     return (
-      <div className='container'>
-
-        <div className='row'>
-          <div className='col-xs-10 col-xs-offset-1'>
-            <Header homelink={this.state.homeLink} />
-          </div>
-        </div>
-
-        <div className='row'>
-          <div className='col-xs-10 col-xs-offset-1'>
-            <Home name='Elton'
-              initialAge={22}
-              otherPerson={otherPerson}
-              greet={this.sayHello}
-              changeLink={(newName) => this.changeLink(newName)}
-              initialHomeLink={this.state.homeLink}>
-              <p>This is a paragraph</p>
-            </Home>
-          </div>
-        </div>
-
-      </div>
+      <Router history={browserHistory}>
+        <Route path={'/'} component={Root}>
+          <IndexRoute component={Home} />
+          <Route path={'user/:id'} component={User} />
+          <Route path={'home'} component={Home} />
+        </Route>
+        <Route path={'home-single'} />
+      </Router>
     )
   }
 }
